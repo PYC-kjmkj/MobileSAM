@@ -6,8 +6,8 @@
 
 import torch
 
-from segment_anything import sam_model_registry
-from segment_anything.utils.onnx import SamOnnxModel
+from mobile_sam import sam_model_registry
+from mobile_sam.utils.onnx import SamOnnxModel
 
 import argparse
 import warnings
@@ -51,7 +51,7 @@ parser.add_argument(
 parser.add_argument(
     "--opset",
     type=int,
-    default=17,
+    default=16,
     help="The ONNX opset version to use. Must be >=11",
 )
 

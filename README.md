@@ -3,25 +3,34 @@
 </p>
 
 # Faster Segment Anything (MobileSAM)
-:pushpin: MobileSAM paper is available at [paper link](https://arxiv.org/pdf/2306.14289.pdf).
+:pushpin: MobileSAM paper is available at [ResearchGate](https://www.researchgate.net/publication/371851844_Faster_Segment_Anything_Towards_Lightweight_SAM_for_Mobile_Applications) and [arXiv](https://arxiv.org/pdf/2306.14289.pdf). The latest version will first appear on [ResearchGate](https://arxiv.org/pdf/2306.14289.pdf), since it takes time for arXiv to update the content.
 
-:grapes: Meida coverage and Projects that adapt from SAM to MobileSAM (Updates)
+:pushpin: **MobileSAM supports ONNX model export**. Feel free to test it on your devices and let us know in case of unexpected issues.
 
-* **2023/06/29**: [AnyLabeling](https://github.com/vietanhdev/anylabeling) supports MobileSAM for Image encoder full-finetuing. Thanks for their effort.
-* **2023/06/29**: [SonarSAM](https://github.com/wangsssky/SonarSAM) supports MobileSAM for auto-labeling. Thanks for their effort.
-* **2023/06/29**: [Stable Diffusion WebUIv](https://github.com/continue-revolution/sd-webui-segment-anything) supports MobileSAM. Thanks for their effort.
+:pushpin: **A demo of MobileSAM** running on **CPU in the hugging face** is open at [demo link](https://huggingface.co/spaces/dhkim2810/MobileSAM). On our own Mac i5 CPU, it takes around 3s. On the hugging face demo, the interface and inferior CPUs make it slower but still works fine. Stayed tuned for a new version with more features!
 
-* **2023/06/28**: [Grounding-SAM](https://github.com/IDEA-Research/Grounded-Segment-Anything) supports MobileSAM with [Grounded-MobileSAM](https://github.com/IDEA-Research/Grounded-Segment-Anything/tree/main/EfficientSAM). Thanks for their effort.
+:pushpin: **A demo of MobileSAM** running on **CPU in your own browser** is open at [demo link](https://mobilesam.glitch.me/). This demo is made by [MobileSAM-in-the-Browser](https://github.com/akbartus/MobileSAM-in-the-Browser). Note that this is an unofficial version and stayed tuned for an official version with more features!
 
-* **2023/06/27**: MobileSAM has been featured by [AK](https://twitter.com/_akhaliq?lang=en), see the link [AK's MobileSAM tweet](https://twitter.com/_akhaliq/status/1673585099097636864). Thanks for their effort.
+:grapes: Media coverage and Projects that adapt from SAM to MobileSAM (Daily update. Thank you all!)
+https://github.com/qiaoyu1002/Personalize-SAM
+* **2023/07/02**: [Personalize-SAM](https://github.com/qiaoyu1002/Personalize-SAM) supports MobileSAM for faster and lightweight Personalize Segment Anything with 1 Shot
+* **2023/07/01**: [MobileSAM-in-the-Browser](https://github.com/akbartus/MobileSAM-in-the-Browser) makes an example implementation of MobileSAM in the browser.
+* **2023/06/30**: [SegmentAnythingin3D](https://github.com/Jumpat/SegmentAnythingin3D) supports MobileSAM to segment anything in 3D efficiently.
+* **2023/06/30**: MobileSAM has been featured by [AK](https://twitter.com/_akhaliq?lang=en) for the second time, see the link [AK's MobileSAM tweet](https://twitter.com/_akhaliq/status/1674410573075718145). Welcome to retweet.
+* **2023/06/29**: [AnyLabeling](https://github.com/vietanhdev/anylabeling) supports MobileSAM for auto-labeling. 
+* **2023/06/29**: [SonarSAM](https://github.com/wangsssky/SonarSAM) supports MobileSAM for Image encoder full-finetuing. 
+* **2023/06/29**: [Stable Diffusion WebUIv](https://github.com/continue-revolution/sd-webui-segment-anything) supports MobileSAM. 
+
+* **2023/06/28**: [Grounding-SAM](https://github.com/IDEA-Research/Grounded-Segment-Anything) supports MobileSAM with [Grounded-MobileSAM](https://github.com/IDEA-Research/Grounded-Segment-Anything/tree/main/EfficientSAM). 
+
+* **2023/06/27**: MobileSAM has been featured by [AK](https://twitter.com/_akhaliq?lang=en), see the link [AK's MobileSAM tweet](https://twitter.com/_akhaliq/status/1673585099097636864). Welcome to retweet.
 ![MobileSAM](assets/model_diagram.jpg?raw=true)
 
-<p float="left">
-  <img src="assets/mask_comparision.jpg?raw=true" width="99.1%" />
-</p>
+:star: **How is MobileSAM trained?** MobileSAM is trained on a single GPU with 100k datasets (1% of the original images) for less than a day. The training code will be available soon.
 
+:star: **How to Adapt from SAM to MobileSAM?** Since MobileSAM keeps exactly the same pipeline as the original SAM, we inherit pre-processing, post-processing, and all other interfaces from the original SAM. Therefore, by assuming everything is exactly the same except for a smaller image encoder, those who use the original SAM for their projects can **adapt to MobileSAM with almost zero effort**.
  
-:star: **MobileSAM** performs on par with the original SAM (at least visually) and keeps exactly the same pipeline as the original SAM except for a change on the image encoder. Specifically, we replace the original heavyweight ViT-H encoder (632M) with a much smaller Tiny-ViT (5M). On a single GPU, MobileSAM runs around 12ms per image: 8ms on the image encoder and 4ms on the mask decoder. 
+:star: **MobileSAM performs on par with the original SAM (at least visually)** and keeps exactly the same pipeline as the original SAM except for a change on the image encoder. Specifically, we replace the original heavyweight ViT-H encoder (632M) with a much smaller Tiny-ViT (5M). On a single GPU, MobileSAM runs around 12ms per image: 8ms on the image encoder and 4ms on the mask decoder. 
 
 * The comparison of ViT-based image encoder is summarzed as follows: 
 
@@ -44,7 +53,7 @@
     Paramters      |  615M   | 9.66M
     Speed      |  456ms  | 12ms
 
-:star: **Original SAM and MobileSAM with a (single) point as the prompt.**  
+:star: **Original SAM and MobileSAM with a point as the prompt.**  
 
 <p float="left">
   <img src="assets/mask_point.jpg?raw=true" width="99.1%" />
@@ -55,7 +64,7 @@
   <img src="assets/mask_box.jpg?raw=true" width="99.1%" />
 </p>
 
-:heart: **Is MobileSAM faster and smaller than FastSAM? Yes, to our knowledge!** 
+:muscle: **Is MobileSAM faster and smaller than FastSAM? Yes!** 
 MobileSAM is around 7 times smaller and around 5 times faster than the concurrent FastSAM. 
 The comparison of the whole pipeline is summarzed as follows: 
 Whole Pipeline (Enc+Dec)                                      | FastSAM | MobileSAM 
@@ -63,8 +72,8 @@ Whole Pipeline (Enc+Dec)                                      | FastSAM | Mobile
 Paramters      |  68M   | 9.66M
 Speed      |  64ms  |12ms
 
-:heart: **Is MobileSAM better than FastSAM for performance? Yes, to our knowledge!** 
-FastSAM is suggested to work with multiple points, thus we compare the mIoU with two prompt points (with different pixel distances) and show the resutls as follows. Our MobileSAM is better than FastSAM under this setup to align with the original SAM. 
+:muscle: **Does MobileSAM aign better with the original SAM than FastSAM? Yes!** 
+FastSAM is suggested to work with multiple points, thus we compare the mIoU with two prompt points (with different pixel distances) and show the resutls as follows. Higher mIoU indicates higher alignment. 
 mIoU                                     | FastSAM | MobileSAM 
 :-----------------------------------------:|:---------|:-----:
 100      |  0.27   | 0.73
@@ -75,9 +84,7 @@ mIoU                                     | FastSAM | MobileSAM
 
 
 
-:heart: **How to Adapt from SAM to MobileSAM?** Since MobileSAM keeps exactly the same pipeline as the original SAM, we inherit pre-processing, post-processing, and all other interfaces from the original SAM. The users who use the original SAM can adapt to MobileSAM with zero effort, by assuming everything is exactly the same except for a smaller image encoder in the SAM.
 
-:heart: **How is MobileSAM trained?** MobileSAM is trained on a single GPU with 100k datasets (1% of the original images) for less than a day. The training code will be available soon.
 
 
 
@@ -104,19 +111,17 @@ cd MobileSAM; pip install -e .
 The MobileSAM can be loaded in the following ways:
 
 ```
-from mobile_encoder.setup_mobile_sam import setup_model
-checkpoint = torch.load('../weights/mobile_sam.pt')
-mobile_sam = setup_model()
-mobile_sam.load_state_dict(checkpoint,strict=True)
-```
+from mobile_sam import sam_model_registry, SamAutomaticMaskGenerator, SamPredictor
 
-Then the model can be easily used in just a few lines to get masks from a given prompt:
+model_type = "vit_t"
+sam_checkpoint = "./weights/mobile_sam.pt"
 
-```
-from segment_anything import SamPredictor
-device = "cuda"
+device = "cuda" if torch.cuda.is_available() else "cpu"
+
+mobile_sam = sam_model_registry[model_type](checkpoint=sam_checkpoint)
 mobile_sam.to(device=device)
 mobile_sam.eval()
+
 predictor = SamPredictor(mobile_sam)
 predictor.set_image(<your_image>)
 masks, _, _ = predictor.predict(<input_prompts>)
@@ -125,11 +130,21 @@ masks, _, _ = predictor.predict(<input_prompts>)
 or generate masks for an entire image:
 
 ```
-from segment_anything import SamAutomaticMaskGenerator
+from mobile_sam import SamAutomaticMaskGenerator
 
 mask_generator = SamAutomaticMaskGenerator(mobile_sam)
 masks = mask_generator.generate(<your_image>)
 ```
+
+### ONNX Export
+**MobileSAM** now supports ONNX export. Export the model with
+
+```
+python scripts/export_onnx_model.py --checkpoint ./weights/mobile_sam.pt --model-type vit_t --output ./mobile_sam.onnx
+```
+
+Also check the [example notebook](https://github.com/ChaoningZhang/MobileSAM/blob/master/notebooks/onnx_model_example.ipynb) to follow detailed steps.
+We recommend to use `onnx==1.12.0` and `onnxruntime==1.13.1` which is tested.
 
 
 ## BibTex of our MobileSAM
