@@ -253,7 +253,9 @@ class Attention(torch.nn.Module):
         if mode and hasattr(self, 'ab'):
             del self.ab
         else:
-            self.ab = self.attention_biases[:, self.attention_bias_idxs]
+            self.register_buffer('ab',
+                                 self.attention_biases[:, self.attention_bias_idxs],
+                                 persistent=False)
 
     def forward(self, x):  # x (B,N,C)
         B, N, _ = x.shape
@@ -287,7 +289,7 @@ class TinyViTBlock(nn.Module):
 
     Args:
         dim (int): Number of input channels.
-        input_resolution (tuple[int, int]): Input resulotion.
+        input_resolution (tuple[int, int]): Input resolution.
         num_heads (int): Number of attention heads.
         window_size (int): Window size.
         mlp_ratio (float): Ratio of mlp hidden dim to embedding dim.
